@@ -1,0 +1,12 @@
+cc_library_headers {
+    name: "libcodec2_rkmpp_headers",
+    export_include_dirs: ["include"],
+    vendor: true,
+}
+
+cc_defaults {
+    name: "codec2-rkmpp-defaults",
+    header_libs: [
+        "libcodec2_rkmpp_store_headers",
+    ],
+}

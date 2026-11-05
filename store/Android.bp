@@ -1,0 +1,25 @@
+cc_library_headers {
+    name: "libcodec2_rkmpp_store_headers",
+    export_include_dirs: ["."],
+    vendor: true,
+}
+
+cc_library_shared {
+    name: "libcodec2_rkmpp_store",
+    defaults: ["libcodec2-aidl-defaults"],
+    header_libs: [
+	"libcodec2_rkmpp_component_headers",
+        "libcodec2_rkmpp_headers",
+        "libcodec2_rkmpp_store_headers",
+    ],
+    srcs: [
+        "C2RkMppComponentStore.cpp",
+    ],
+    shared_libs: [
+        "libmpp",
+	"libcodec2_rkmpp_component",
+        "libdmabufheap",
+        "libstagefright_foundation",
+    ],
+    vendor: true,
+}

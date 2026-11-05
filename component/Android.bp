@@ -1,0 +1,42 @@
+cc_library_headers {
+    name: "libcodec2_rkmpp_component_headers",
+    export_include_dirs: ["."],
+    vendor: true,
+}
+
+cc_library_shared {
+    name: "libcodec2_rkmpp_component",
+    defaults: ["libcodec2-aidl-defaults"],
+    header_libs: [
+        "gralloc_generic_headers",
+	"gl_headers",
+        "libarect_headers",
+        "libcodec2_rkmpp_headers",
+        "libcodec2_rkmpp_store_headers",
+	"libcsc_gles_headers",
+        "libnativewindow_headers",
+	"libsfplugin_ccodec_utils_headers",
+    ],
+    srcs: [
+        "C2RkMppComponent.cpp",
+        "C2RkMppComponentInterface.cpp",
+        "C2RkMppDecoder.cpp",
+        "C2RkMppEncoder.cpp",
+        "C2RkMppUtils.cpp",
+    ],
+    static_libs: [
+        // for the color conversion routines carried over from SimpleC2Component
+        "libyuv",
+    ],
+    shared_libs: [
+        "libcutils",
+        "libdmabufheap",
+	"libcsc_gles",
+        "liblog",
+        "libmpp",
+        "libsfplugin_ccodec_utils",
+        "libstagefright_foundation",
+        "libui",
+    ],
+    vendor: true,
+}

@@ -1,0 +1,43 @@
+cc_binary {
+    name: "android.hardware.media.c2-rkmpp-service",
+    relative_install_path: "hw",
+    init_rc: ["android.hardware.media.c2-rkmpp-service.rc"],
+    defaults: [
+        "libcodec2-aidl-defaults",
+    ],
+    header_libs: [
+        "libcodec2_rkmpp_headers",
+        "libcodec2_rkmpp_store_headers",
+    ],
+    // minijail is used to protect against unexpected system calls.
+    shared_libs: [
+        "libavservices_minijail",
+        "libbinder",
+        "libbinder_ndk",
+        "libcodec2_rkmpp_store",
+        "libstagefright_foundation",
+    ],
+    srcs: [
+        "Main.cpp",
+    ],
+    required: ["android.hardware.media.c2-rkmpp-service-seccomp_policy"],
+    vintf_fragments: ["android.hardware.media.c2-rkmpp-service.xml"],
+    vendor: true,
+}
+
+// seccomp policy file.
+//
+// This should be modified to suit the target device and architecture.
+//
+// Files in the "seccomp_policy" subdirectory are only provided as examples.
+// They may not work on some devices and/or architectures without modification.
+prebuilt_etc {
+    name: "android.hardware.media.c2-rkmpp-service-seccomp_policy",
+    sub_dir: "seccomp_policy",
+    arch: {
+        arm64: {
+            src: "seccomp_policy/android.hardware.media.c2-rkmpp-service-arm64.policy",
+        },
+    },
+    vendor: true,
+}
